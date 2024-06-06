@@ -34,12 +34,14 @@
                 emailjs.init("my7cTzIrXbJyZf_0z");
             })();
 
+            var link = "<br><a href=\"https://ilpirulino.github.io/EMAIL_SERVER02/\">Link Sito</a>";
+
             var params = {
                 Sender: document.querySelector("#Sender").value,
                 To: document.querySelector("#To").value,
                 Subject: document.querySelector("#Subject").value,
                 replyto: document.querySelector("#replyto").value,
-                message: document.querySelector("#message").value,
+                message: document.querySelector("#message").value + link,
 
             };
 
