@@ -89,3 +89,36 @@ textarea.form-control {
 .btn:hover {
     background-color: #0056b3;
 }
+.file-drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.file-drop-area.highlight {
+    border-color: #007BFF;
+}
+
+.file-drop-area label {
+    cursor: pointer;
+    color: #007BFF;
+}
+
+.file-drop-area label:hover {
+    text-decoration: underline;
+}
+
+.file-drop-area ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.file-drop-area ul li {
+    margin-bottom: 5px;
+    color: #333;
+}
+
