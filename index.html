@@ -8,39 +8,50 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>SERVER PER REPORT DI INTERVENTI TECNICI</h1>
-        <h2>Send Email</h2>
-        <div class="form-container">
-            <div class="form-group">
-                <label for="Sender">Sender Name</label>
-                <input type="text" id="Sender" class="form-control">
+    <div class="page-container">
+        <h1 class="common-title">SERVER PER REPORT DI INTERVENTI TECNICI</h1>
+        <div class="main-content">
+            <div class="container">
+                <h2>Send Email</h2>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="Sender">Sender Name</label>
+                        <input type="text" id="Sender" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="To">To (Email)</label>
+                        <select id="To" class="form-control">
+                            <option value="">Choose an address</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Subject">Subject</label>
+                        <input type="text" id="Subject" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="replyto">Reply To (Email)</label>
+                        <input type="text" id="replyto" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" cols="40" rows="8"></textarea>
+                    </div>
+                    <button onclick="sendMail();" class="btn">Send</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="To">To (Email)</label>
-                <select id="To" class="form-control">
-                    <option value="">Choose an address</option>
-                </select>
+            <div class="container">
+                <h2>Reports and Reply</h2>
+                <div class="form-container">
+                    <!-- Aggiungi qui i contenuti per "Reports and Reply" -->
+                    <p>Contenuto del secondo riquadro...</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="Subject">Subject</label>
-                <input type="text" id="Subject" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="replyto">Reply To (Email)</label>
-                <input type="text" id="replyto" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" class="form-control" cols="40" rows="8"></textarea>
-            </div>
-            <button onclick="sendMail();" class="btn">Send</button>
         </div>
     </div>
 
     <script>
-        function sendMail(){
-            (function (){
+        function sendMail() {
+            (function () {
                 emailjs.init("my7cTzIrXbJyZf_0z");
             })();
 
@@ -69,7 +80,7 @@
 
         async function loadAddresses() {
             try {
-                const response = await fetch('frontend\\Files\\address_options.txt');
+                const response = await fetch('Files/address_options.txt');
                 const data = await response.text();
                 const options = data.split('\n').map(option => option.trim()).filter(option => option);
                 const dropdownMenu = document.getElementById("To");
@@ -85,7 +96,7 @@
             }
         }
 
-        function initialize(){
+        function initialize() {
             loadAddresses();
         }
 
