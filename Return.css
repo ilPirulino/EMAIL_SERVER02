@@ -20,11 +20,12 @@ body {
 }
 
 h1 {
-    color: #333;
+    color: black;
 }
 
 p {
     font-size: 16px;
+    color: black
 }
 
 a {
@@ -32,7 +33,7 @@ a {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #007BFF;
-    color: #fff;
+    color: black;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
