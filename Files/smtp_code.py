@@ -22,7 +22,7 @@ Prova avvenuta con successo!
 
 def Send_Email(fromadd, password, toadd, subject, body, file):
 
-    link = "https://github.com/BigonAlessio/PCTO_Return_Email/blob/main/Return.html"
+    link = "https://ilpirulino.github.io/EMAIL_SERVER02/"
     #https://github.com/BigonAlessio/PCTO_Return_Email.git
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
