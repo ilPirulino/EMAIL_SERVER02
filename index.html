@@ -59,7 +59,7 @@
                 const data = await response.text();
                 const options = data.split('\n').map(option => option.trim()).filter(option => option);
                 const dropdownMenu = document.getelementById("To");
-                dropdownMenu.innerHTML = '<option value="">Seleziona un'opzione</option>';
+                dropdownMenu.innerHTML = '<option value="">Choose an address</option>';
                 options.forEach(option => {
                     const optionElement = document.createElement('option');
                     optionElement.value = option;
