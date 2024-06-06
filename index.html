@@ -37,8 +37,8 @@
                         <textarea id="message" class="form-control" cols="40" rows="8"></textarea>
                     </div>
                     <div class="file-drop-container">
-                        <p class="file-drop-label">Trascina i file qui o selezionali</p>
-                        <div id="file-drop-area" class="file-drop-area" ondrop="handleSendEmailDrop(event)" ondragover="allowDrop(event)">
+                        <p class="file-drop-label">Drag and drop files here or click to select</p>
+                        <div id="file-drop-area" class="file-drop-area" ondrop="handleFileDrop(event)" ondragover="allowDrop(event)">
                             <input type="file" id="fileElem" multiple accept="image/*" style="display: none;" onchange="handleFilesSelect(this.files)">
                         </div>
                     </div>
@@ -114,7 +114,7 @@
 
         window.onload = initialize;
 
-        function handleFiles(files) {
+        function handleFilesSelect(files) {
             var dropArea = document.getElementById('file-drop-area');
             var fileList = document.createElement('ul');
 
@@ -127,10 +127,10 @@
             dropArea.appendChild(fileList);
         }
 
-        function handleSendEmailDrop(event) {
+        function handleFileDrop(event) {
             event.preventDefault();
             var files = event.dataTransfer.files;
-            handleFiles(files);
+            handleFilesSelect(files);
         }
 
         function allowDrop(event) {
