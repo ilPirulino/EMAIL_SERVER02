@@ -1,30 +1,41 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scarica il PDF</title>
-    <link rel="stylesheet" href="frontend\\style.css">
+    <link rel="stylesheet" href="frontend/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>SERVER PER REPORT DI INTERVENTI TECNICI</h1>
-        <h1>Send Email</h1>
-        Sender Name
-        <input type="text" id="Sender"><br>
-        To (Email)
-        <select id = "To">
-            <option value="">Choose an address</option>
-        </select>
-        <br>Subject
-        <input type="text" id="Subject"><br>
-        Reply To (Email)
-        <input type="text" id="replyto"><br>
-        Message<br>
-        <textarea id="message" cols="40" rows="8"></textarea><br>
-        <button onclick = "sendMail();">Send</button>
+        <h2>Send Email</h2>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="Sender">Sender Name</label>
+                <input type="text" id="Sender" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="To">To (Email)</label>
+                <select id="To" class="form-control">
+                    <option value="">Choose an address</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Subject">Subject</label>
+                <input type="text" id="Subject" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="replyto">Reply To (Email)</label>
+                <input type="text" id="replyto" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" class="form-control" cols="40" rows="8"></textarea>
+            </div>
+            <button onclick="sendMail();" class="btn">Send</button>
+        </div>
     </div>
 
     <script>
@@ -41,7 +52,6 @@
                 Subject: document.querySelector("#Subject").value,
                 replyto: document.querySelector("#replyto").value,
                 message: document.querySelector("#message").value + link,
-
             };
 
             var serviceID = "service_plf6iaf";
@@ -49,11 +59,15 @@
 
             emailjs.send(serviceID, templateID, params)
                 .then(res => {
-                    alert("Email sent successfully!")
+                    alert("Email sent successfully!");
                 })
-                .catch();
+                .catch(err => {
+                    console.error("Error sending email:", err);
+                    alert("Failed to send email. Please try again later.");
+                });
         }
-        async function loadAddresses(){
+
+        async function loadAddresses() {
             try {
                 const response = await fetch('frontend\\Files\\address_options.txt');
                 const data = await response.text();
@@ -66,15 +80,16 @@
                     optionElement.textContent = option;
                     dropdownMenu.appendChild(optionElement);
                 });
-            } catch(error) {
+            } catch (error) {
                 console.error('Options Load Error');
             }
         }
+
         function initialize(){
             loadAddresses();
         }
 
-        window.onload = initialize();
+        window.onload = initialize;
     </script>
 </body>
 </html>
