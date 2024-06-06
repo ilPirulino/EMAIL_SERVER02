@@ -80,7 +80,7 @@
 
         async function loadAddresses() {
             try {
-                const response = await fetch('Files/address_options.txt');
+                const response = await fetch('frontend\\Files\\address_options.txt');
                 const data = await response.text();
                 const options = data.split('\n').map(option => option.trim()).filter(option => option);
                 const dropdownMenu = document.getElementById("To");
