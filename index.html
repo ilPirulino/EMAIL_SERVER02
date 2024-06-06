@@ -38,7 +38,7 @@
                     </div>
                     <div class="file-drop-container">
                         <p class="file-drop-label">Trascina i file qui o selezionali</p>
-                        <div id="file-drop-area" class="file-drop-area" ondrop="handleFilesDrop(event)" ondragover="allowDrop(event)">
+                        <div id="file-drop-area" class="file-drop-area" ondrop="handleSendEmailDrop(event)" ondragover="allowDrop(event)">
                             <input type="file" id="fileElem" multiple accept="image/*" style="display: none;" onchange="handleFilesSelect(this.files)">
                         </div>
                     </div>
@@ -48,10 +48,8 @@
             <div class="container">
                 <h2>Reports and Reply</h2>
                 <div class="form-container">
-                    <h3>Allegati</h3>
-                    <div id="attachment-drop-area" class="file-drop-area" ondrop="handleAttachmentsDrop(event)" ondragover="allowDrop(event)">
-                        Trascina qui i file da allegare
-                    </div>
+                    <!-- Aggiungi qui i contenuti per "Reports and Reply" -->
+                    <p>Contenuto del secondo riquadro...</p>
                 </div>
             </div>
         </div>
@@ -59,22 +57,62 @@
 
     <script>
         function sendMail() {
-            // Codice per inviare la mail
+            (function () {
+                emailjs.init("my7cTzIrXbJyZf_0z");
+            })();
+
+            var link = "<br><a href=\"https://ilpirulino.github.io/EMAIL_SERVER02/\">Link Sito</a>";
+
+            var params = {
+                Sender: document.querySelector("#Sender").value,
+                To: document.querySelector("#To").value,
+                Subject: document.querySelector("#Subject").value,
+                replyto: document.querySelector("#replyto").value,
+                message: document.querySelector("#message").value + link,
+            };
+
+            // Aggiungi gli allegati
+            var files = document.getElementById('fileElem').files;
+            for (var i = 0; i < files.length; i++) {
+                params['attachment' + i] = files[i];
+            }
+
+            var serviceID = "service_plf6iaf";
+            var templateID = "template_3hhhd3d";
+
+            emailjs.send(serviceID, templateID, params)
+                .then(res => {
+                    alert("Email sent successfully!");
+                })
+                .catch(err => {
+                    console.error("Error sending email:", err);
+                    alert("Failed to send email. Please try again later.");
+                });
         }
 
-        function allowDrop(event) {
-            event.preventDefault();
+        async function loadAddresses() {
+            try {
+                const response = await fetch('frontend\\Files\\address_options.txt');
+                const data = await response.text();
+                const options = data.split('\n').map(option => option.trim()).filter(option => option);
+                const dropdownMenu = document.getElementById("To");
+                dropdownMenu.innerHTML = '<option value="">Choose an address</option>';
+                options.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option;
+                    dropdownMenu.appendChild(optionElement);
+                });
+            } catch (error) {
+                console.error('Options Load Error');
+            }
         }
 
-        function handleFilesDrop(event) {
-            event.preventDefault();
-            var files = event.dataTransfer.files;
-            handleFiles(files);
+        function initialize() {
+            loadAddresses();
         }
 
-        function handleFilesSelect(files) {
-            handleFiles(files);
-        }
+        window.onload = initialize;
 
         function handleFiles(files) {
             var dropArea = document.getElementById('file-drop-area');
@@ -89,10 +127,14 @@
             dropArea.appendChild(fileList);
         }
 
-        function handleAttachmentsDrop(event) {
+        function handleSendEmailDrop(event) {
             event.preventDefault();
             var files = event.dataTransfer.files;
-            // Codice per gestire i file trascinati e allegarli alla mail
+            handleFiles(files);
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
         }
     </script>
 </body>
