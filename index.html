@@ -13,7 +13,45 @@
         <p>Manca l'implementazione del server flask</p>
         <a href="frontend\\Files\\Report_prova02.5.pdf" type="_blank">Visualizza PDF</a>
         <button type="button" id="sendemail">Invia E-mail</button>
+        <h1>Send Email</h1>
+        Sender Name
+        <input type="text" id="Sender"><br>
+        To (Email)
+        <input type="text" id="To"><br>
+        Subject
+        <input type="text" id="Subject"><br>
+        Reply To (Email)
+        <input type="text" id="replyto"><br>
+        Message<br>
+        <textarea id="message" cols="40" rows="8"></textarea><br>
+        <button onclick = "sendMail();">Send</button>
     </div>
+
+    <script>
+        function sendMail(){
+            (function (){
+                emailjs.init("my7cTzIrXbJyZf_0z");
+            })();
+
+            var params = {
+                Sender: document.querySelector("#Sender").value,
+                To: document.querySelector("#To").value,
+                Subject: document.querySelector("#Subject").value,
+                replyto: document.querySelector("#replyto").value,
+                message: document.querySelector("#message").value,
+
+            };
+
+            var serviceID = "service_plf6iaf";
+            var templateID = "template_3hhhd3d";
+
+            emailjs.send(serviceID, templateID, params)
+                .then(res => {
+                    alert("Email sent successfully!")
+                })
+                .catch();
+        }
+    </script>
 </body>
 </html>
 
