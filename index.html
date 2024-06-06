@@ -14,6 +14,14 @@
         <a href="frontend\\Files\\Report_prova02.5.pdf" type="_blank">Visualizza PDF</a>
         <button type="button" id="sendemail">Invia E-mail</button>
     </div>
+    <script>
+        document.getElementById('sendemail').addEventListener('click', function() {
+            fetch('/sendemail')
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Errore: ', error));
+        });
+    </script>
 </body>
 </html>
 
