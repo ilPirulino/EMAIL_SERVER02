@@ -36,9 +36,11 @@
                         <label for="message">Message</label>
                         <textarea id="message" class="form-control" cols="40" rows="8"></textarea>
                     </div>
-                    <div id="file-drop-area" class="file-drop-area">
-                        <label for="fileElem">Trascina i file qui o selezionali</label>
-                        <input type="file" id="fileElem" multiple accept="image/*" style="display: none;" onchange="handleFiles(this.files)">
+                    <div class="file-drop-container">
+                        <p class="file-drop-label">Trascina i file qui o selezionali</p>
+                        <div id="file-drop-area" class="file-drop-area">
+                            <input type="file" id="fileElem" multiple accept="image/*" style="display: none;" onchange="handleFiles(this.files)">
+                        </div>
                     </div>
                     <button onclick="sendMail();" class="btn">Send</button>
                 </div>
