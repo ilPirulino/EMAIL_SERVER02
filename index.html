@@ -15,7 +15,9 @@
         Sender Name
         <input type="text" id="Sender"><br>
         To (Email)
-        <input type="text" id="To"><br>
+        <select id = "To">
+            <option value="">Choose an address</option>
+        </select>
         Subject
         <input type="text" id="Subject"><br>
         Reply To (Email)
@@ -51,6 +53,28 @@
                 })
                 .catch();
         }
+        async function loadAddresses(){
+            try {
+                const response = await fetch('frontend\\Files\\address_options.txt');
+                const data = await response.text();
+                const options = data.split('\n').map(option => option.trim()).filter(option => option);
+                const dropdownMenu = document.getelementById("To");
+                dropdownMenu.innerHTML = '<option value="">Seleziona un'opzione</option>';
+                options.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option;
+                    dropdownMenu.appendChild(optionElement);
+                });
+            } catch(error) {
+                console.error('Options Load Error');
+            }   
+        }
+        function initialize(){
+            loadAddress();
+        }
+        
+        window.onload = initialize;
     </script>
 </body>
 </html>
