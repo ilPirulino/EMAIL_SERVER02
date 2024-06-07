@@ -3,52 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server per Report di Interventi Tecnici</title>
+    <title>Scarica il PDF</title>
     <link rel="stylesheet" href="frontend/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <div class="page-container">
-        <header>
-            <h1 class="common-title">SERVER PER REPORT DI INTERVENTI TECNICI</h1>
-        </header>
-        <main class="grid-container">
-            <section class="send-email grid-item">
-                <h2>Invia Email</h2>
+        <h1 class="common-title">SERVER PER REPORT DI INTERVENTI TECNICI</h1>
+        <div class="main-content">
+            <div class="container" style="margin-right: 10px; margin-bottom: 10px;">
+                <h2>Send Email</h2>
                 <div class="form-container">
                     <div class="form-group">
-                        <label for="sender">Nome Mittente</label>
-                        <input type="text" id="sender" class="form-control">
+                        <label for="Sender">Sender Name</label>
+                        <input type="text" id="Sender" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="to">A (Email)</label>
-                        <input type="email" id="to" class="form-control">
+                        <label for="Ton">To (Email)</label>
+                        <input type="text" id="Ton" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="subject">Oggetto</label>
-                        <input type="text" id="subject" class="form-control">
+                        <label for="Subject">Subject</label>
+                        <input type="text" id="Subject" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="replyto">Rispondi a (Email)</label>
-                        <input type="email" id="replyto" class="form-control">
+                        <label for="replyto">Reply To (Email)</label>
+                        <input type="text" id="replyto" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="message">Messaggio</label>
+                        <label for="message">Message</label>
                         <textarea id="message" class="form-control" cols="40" rows="8"></textarea>
                     </div>
-                    <button onclick="sendMail();" class="btn">Invia</button>
+                    <button onclick="sendMail();" class="btn">Send</button>
                 </div>
-            </section>
-            <section class="reports-reply grid-item">
-                <h2>Report e Risposta</h2>
+            </div>
+            <div class="container">
+                <h2>Reports and Reply</h2>
                 <div class="form-group">
-                    <label for="saved-emails">Email Salvate</label>
-                    <select id="saved-emails" class="form-control">
-                        <option value="">Scegli un indirizzo</option>
+                    <label for="To">Saved Mail</label>
+                    <select id="To" class="form-control">
+                        <option value="">Choose an address</option>
                     </select>
                 </div>
-            </section>
-        </main>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -59,20 +57,20 @@
             var link2 = "<br><a href=\"https://orionsrl-my.sharepoint.com/:b:/r/personal/a_bigon_orion-srl_it/Documents/Report_prova02.5.pdf?csf=1&web=1&e=YCexHk/\">Link PDF</a>";
 
             var params = {
-                Sender: document.querySelector("#sender").value,
-                To: document.querySelector("#to").value ? document.querySelector("#to").value : document.querySelector("#saved-emails").value,
-                Subject: document.querySelector("#subject").value,
+                Sender: document.querySelector("#Sender").value,
+                To: document.querySelector("#Ton").value ? document.querySelector("#Ton").value : document.querySelector("#To").value,
+                Subject: document.querySelector("#Subject").value,
                 replyto: document.querySelector("#replyto").value,
                 message: document.querySelector("#message").value + link1 + link2,
             };
 
             emailjs.send("service_plf6iaf", "template_3hhhd3d", params)
                 .then(res => {
-                    alert("Email inviata con successo!");
+                    alert("Email sent successfully!");
                 })
                 .catch(err => {
-                    console.error("Errore durante l'invio dell'email:", err);
-                    alert("Impossibile inviare l'email. Si prega di riprovare più tardi.");
+                    console.error("Error sending email:", err);
+                    alert("Failed to send email. Please try again later.");
                 });
         }
 
@@ -81,8 +79,8 @@
                 const response = await fetch('frontend/Files/address_options.txt');
                 const data = await response.text();
                 const options = data.split('\n').map(option => option.trim()).filter(option => option);
-                const dropdownMenu = document.getElementById("saved-emails");
-                dropdownMenu.innerHTML = '<option value="">Scegli un indirizzo</option>';
+                const dropdownMenu = document.getElementById("To");
+                dropdownMenu.innerHTML = '<option value="">Choose an address</option>';
                 options.forEach(option => {
                     const optionElement = document.createElement('option');
                     optionElement.value = option;
@@ -90,7 +88,7 @@
                     dropdownMenu.appendChild(optionElement);
                 });
             } catch (error) {
-                console.error('Errore durante il caricamento degli indirizzi:', error);
+                console.error('Options Load Error', error);
             }
         }
 
