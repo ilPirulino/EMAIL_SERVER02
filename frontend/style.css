@@ -4,15 +4,13 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .page-container {
     width: 90%;
     max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
     text-align: center;
 }
 
@@ -89,6 +87,7 @@ textarea.form-control {
 .btn:hover {
     background-color: #0056b3;
 }
+
 .file-drop-area {
     border: 2px dashed #ccc;
     border-radius: 8px;
@@ -118,7 +117,4 @@ textarea.form-control {
 }
 
 .file-drop-area ul li {
-    margin-bottom: 5px;
-    color: #333;
-}
-
+    margin-bottom: 5px
