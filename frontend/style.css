@@ -2,6 +2,7 @@
 html, body, div, header, main, section, h1, h2, form, input, textarea, button, select, option {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 /* Stile del body */
@@ -26,15 +27,24 @@ body {
     margin-bottom: 20px;
 }
 
-/* Sezioni */
-section {
-    margin-bottom: 30px;
+/* Grid container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Grid item */
+.grid-item {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Form container */
 .form-container {
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 100%;
 }
 
 /* Etichette e input */
@@ -90,11 +100,7 @@ option {
 
 /* Responsive */
 @media only screen and (max-width: 600px) {
-    .page-container {
-        padding: 10px;
-    }
-
-    .form-container {
-        max-width: 100%;
+    .grid-container {
+        grid-template-columns: 1fr;
     }
 }
