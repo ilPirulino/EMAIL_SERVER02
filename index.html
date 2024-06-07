@@ -20,9 +20,7 @@
                     </div>
                     <div class="form-group">
                         <label for="To">To (Email)</label>
-                        <select id="To" class="form-control">
-                            <option value="">Choose an address</option>
-                        </select>
+                        <input type="text" id="Ton" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="Subject">Subject</label>
@@ -41,10 +39,10 @@
             </div>
             <div class="container">
                 <h2>Reports and Reply</h2>
-                <div class="form-container">
-                    <p>Select Files:</p>
-                    <div id="fileload"></div>
-                </div>
+                <label for="To">Saved Mail</label>
+                <select id="To" class="form-control">
+                    <option value="">Choose an address</option>
+                </select>
             </div>
         </div>
     </div>
@@ -60,7 +58,10 @@
 
             var params = {
                 Sender: document.querySelector("#Sender").value,
-                To: document.querySelector("#To").value,
+                if(document.getElementById("Ton").text() === "")
+                    To: document.querySelector("#To").value,
+                else
+                    To: document.getElementById("Ton").value,
                 Subject: document.querySelector("#Subject").value,
                 replyto: document.querySelector("#replyto").value,
                 message: document.querySelector("#message").value + link1 + link2,
