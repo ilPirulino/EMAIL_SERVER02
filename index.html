@@ -36,12 +36,6 @@
                         <label for="message">Message</label>
                         <textarea id="message" class="form-control" cols="40" rows="8"></textarea>
                     </div>
-                    <div class="file-drop-container">
-                        <p class="file-drop-label">Drag and drop files here or click to select</p>
-                        <div id="file-drop-area" class="file-drop-area" ondrop="handleFileDrop(event)" ondragover="allowDrop(event)">
-                            <input type="file" id="fileElem" multiple accept="image/*" style="display: none;" onchange="handleFilesSelect(this.files)">
-                        </div>
-                    </div>
                     <button onclick="sendMail();" class="btn">Send</button>
                 </div>
             </div>
@@ -70,12 +64,6 @@
                 replyto: document.querySelector("#replyto").value,
                 message: document.querySelector("#message").value + link,
             };
-
-            // Aggiungi gli allegati
-            var files = document.getElementById('fileElem').files;
-            for (var i = 0; i < files.length; i++) {
-                params['attachment' + i] = files[i];
-            }
 
             var serviceID = "service_plf6iaf";
             var templateID = "template_3hhhd3d";
@@ -113,29 +101,6 @@
         }
 
         window.onload = initialize;
-
-        function handleFilesSelect(files) {
-            var dropArea = document.getElementById('file-drop-area');
-            var fileList = document.createElement('ul');
-
-            for (var i = 0; i < files.length; i++) {
-                var fileItem = document.createElement('li');
-                fileItem.textContent = files[i].name;
-                fileList.appendChild(fileItem);
-            }
-
-            dropArea.appendChild(fileList);
-        }
-
-        function handleFileDrop(event) {
-            event.preventDefault();
-            var files = event.dataTransfer.files;
-            handleFilesSelect(files);
-        }
-
-        function allowDrop(event) {
-            event.preventDefault();
-        }
     </script>
 </body>
 </html>
