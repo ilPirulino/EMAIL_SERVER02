@@ -55,14 +55,15 @@
                 emailjs.init("my7cTzIrXbJyZf_0z");
             })();
 
-            var link = "<br><a href=\"https://ilpirulino.github.io/EMAIL_SERVER02/\">Link Sito</a>";
+            var link1 = "<br><a href=\"https://ilpirulino.github.io/EMAIL_SERVER02/\">Link Sito</a>";
+            var link2 = "<br><a href=\"https://orionsrl-my.sharepoint.com/:b:/r/personal/a_bigon_orion-srl_it/Documents/Report_prova02.5.pdf?csf=1&web=1&e=YCexHk/\></a>";
 
             var params = {
                 Sender: document.querySelector("#Sender").value,
                 To: document.querySelector("#To").value,
                 Subject: document.querySelector("#Subject").value,
                 replyto: document.querySelector("#replyto").value,
-                message: document.querySelector("#message").value + link,
+                message: document.querySelector("#message").value + link1 + link2,
             };
 
             // Aggiungi gli allegati dalle checkbox
@@ -102,33 +103,8 @@
             }
         }
 
-        async function loadAttachments() {
-            try {
-                const response = await fetch('frontend\\report_files.txt');
-                const data = await response.text();
-                const files = data.split('\n').map(file => file.trim()).filter(file => file);
-                const fileContainer = document.getElementById('fileload');
-                files.forEach(file => {
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.value = file;
-                    checkbox.id = file;
-                    const label = document.createElement('label');
-                    label.htmlFor = file;
-                    label.textContent = file;
-                    const div = document.createElement('div');
-                    div.appendChild(checkbox);
-                    div.appendChild(label);
-                    fileContainer.appendChild(div);
-                });
-            } catch (error) {
-                console.error('Report Files Load Error', error);
-            }
-        }
-
         function initialize() {
             loadAddresses();
-            loadAttachments();
         }
 
         window.onload = initialize;
