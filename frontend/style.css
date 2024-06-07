@@ -1,124 +1,100 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+/* Reset dei margini e dei padding */
+html, body, div, header, main, section, h1, h2, form, input, textarea, button, select, option {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
+/* Stile del body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Container della pagina */
 .page-container {
-    width: 90%;
-    max-width: 1200px;
-    text-align: center;
-}
-
-.common-title {
-    color: #007BFF;
-    margin-bottom: 20px;
-}
-
-.main-content {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.container {
-    background-color: #fff;
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 20px;
+/* Titolo comune */
+.common-title {
     text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Sezioni */
+section {
+    margin-bottom: 30px;
+}
+
+/* Form container */
 .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    width: 100%;
-}
-
-.form-group label {
+/* Etichette e input */
+label {
+    display: block;
     margin-bottom: 5px;
-    font-weight: bold;
 }
 
-.form-control {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+input[type="text"],
+input[type="email"],
+textarea {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
 }
 
-textarea.form-control {
+textarea {
     resize: vertical;
 }
 
+/* Bottone */
 .btn {
-    padding: 10px 20px;
-    background-color: #007BFF;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .btn:hover {
     background-color: #0056b3;
 }
-.file-drop-area {
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-    transition: border-color 0.3s;
+
+/* Selezione */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #fff;
 }
 
-.file-drop-area.highlight {
-    border-color: #007BFF;
+/* Opzioni della selezione */
+option {
+    padding: 5px;
 }
 
-.file-drop-area label {
-    cursor: pointer;
-    color: #007BFF;
-}
+/* Responsive */
+@media only screen and (max-width: 600px) {
+    .page-container {
+        padding: 10px;
+    }
 
-.file-drop-area label:hover {
-    text-decoration: underline;
+    .form-container {
+        max-width: 100%;
+    }
 }
-
-.file-drop-area ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0 0;
-}
-
-.file-drop-area ul li {
-    margin-bottom: 5px;
-    color: #333;
-}
-
