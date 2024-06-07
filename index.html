@@ -65,28 +65,50 @@
                 message: document.querySelector("#message").value + link,
             };
 
-            // Aggiungi gli allegati dalle checkbox
             var checkboxes = document.querySelectorAll("#fileload input[type='checkbox']:checked");
-            checkboxes.forEach((checkbox, index) => {
-                params['attachment' + index] = checkbox.value;
+            var attachments = [];
+
+            checkboxes.forEach(checkbox => {
+                attachments.push(loadFileAsBase64(checkbox.value));
             });
 
-            var serviceID = "service_plf6iaf";
-            var templateID = "template_3hhhd3d";
-
-            emailjs.send(serviceID, templateID, params)
-                .then(res => {
-                    alert("Email sent successfully!");
-                })
-                .catch(err => {
-                    console.error("Error sending email:", err);
-                    alert("Failed to send email. Please try again later.");
+            Promise.all(attachments).then(files => {
+                files.forEach((file, index) => {
+                    params['attachment' + index] = file;
                 });
+
+                var serviceID = "service_plf6iaf";
+                var templateID = "template_3hhhd3d";
+
+                emailjs.send(serviceID, templateID, params)
+                    .then(res => {
+                        alert("Email sent successfully!");
+                    })
+                    .catch(err => {
+                        console.error("Error sending email:", err);
+                        alert("Failed to send email. Please try again later.");
+                    });
+            });
+        }
+
+        function loadFileAsBase64(path) {
+            return new Promise((resolve, reject) => {
+                fetch(path)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        var reader = new FileReader();
+                        reader.onloadend = () => {
+                            resolve(reader.result.split(',')[1]);  // Prende solo la parte base64
+                        };
+                        reader.readAsDataURL(blob);
+                    })
+                    .catch(error => reject(error));
+            });
         }
 
         async function loadAddresses() {
             try {
-                const response = await fetch('frontend\\Files\\address_options.txt');
+                const response = await fetch('frontend/Files/address_options.txt');
                 const data = await response.text();
                 const options = data.split('\n').map(option => option.trim()).filter(option => option);
                 const dropdownMenu = document.getElementById("To");
@@ -104,7 +126,7 @@
 
         async function loadAttachments() {
             try {
-                const response = await fetch('frontend\\report_files.txt');
+                const response = await fetch('frontend/Files/report_files.txt');
                 const data = await response.text();
                 const files = data.split('\n').map(file => file.trim()).filter(file => file);
                 const fileContainer = document.getElementById('fileload');
