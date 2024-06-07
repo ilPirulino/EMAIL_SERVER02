@@ -67,15 +67,8 @@
 
             // Aggiungi gli allegati dalle checkbox
             var checkboxes = document.querySelectorAll("#fileload input[type='checkbox']:checked");
-            var attachments = [];
-
             checkboxes.forEach((checkbox, index) => {
-                attachments.push(checkbox.value);
-            });
-
-            // Aggiungi gli URL degli allegati ai parametri
-            attachments.forEach((attachment, index) => {
-                params['attachment' + index] = attachment;
+                params['attachment' + index] = checkbox.value;
             });
 
             var serviceID = "service_plf6iaf";
@@ -93,7 +86,7 @@
 
         async function loadAddresses() {
             try {
-                const response = await fetch('frontend/Files/address_options.txt');
+                const response = await fetch('frontend\\Files\\address_options.txt');
                 const data = await response.text();
                 const options = data.split('\n').map(option => option.trim()).filter(option => option);
                 const dropdownMenu = document.getElementById("To");
@@ -111,7 +104,7 @@
 
         async function loadAttachments() {
             try {
-                const response = await fetch('frontend/Files/report_files.txt');
+                const response = await fetch('frontend\\report_files.txt');
                 const data = await response.text();
                 const files = data.split('\n').map(file => file.trim()).filter(file => file);
                 const fileContainer = document.getElementById('fileload');
