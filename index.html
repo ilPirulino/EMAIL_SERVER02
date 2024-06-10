@@ -9,14 +9,18 @@
 </head>
 <body>
     <div class="page-container">
-        <h1 class="common-title">SERVER PER REPORT DI INTERVENTI TECNICI</h1>
+        <h1 class="common-title">SITO PER REPORT DI INTERVENTI TECNICI</h1>
         <div class="main-content">
             <div class="container" style="margin-right: 10px; margin-bottom: 10px;">
                 <h2>Send Email</h2>
                 <div class="form-container">
                     <div class="form-group">
                         <label for="Sender">Sender Name</label>
-                        <input type="text" id="Sender" class="form-control">
+                        <select id="Sender" class="form-control">
+                            <option value="">Tecnico</option>
+                            <option value="">Amministrazione</option>
+                            <option value="">Servizio Clienti</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="Ton">To (Email)</label>
